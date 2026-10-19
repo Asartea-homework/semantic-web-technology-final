@@ -51,13 +51,11 @@ def read_file(file_path):
 
 def main():
     data_dir = Path("data/")
-    output_dir = Path("output/")
     docs = []
     files = data_dir.glob("*.json")
     for file in files:
         docs.extend(read_file(file))
-    output_dir.mkdir(exist_ok=True)
-    with open(output_dir / "output.jsonl", "w") as f:
+    with open("stories.jsonl", "w") as f:
         for doc in docs:
             f.write(json.dumps(doc) + "\n")
 
