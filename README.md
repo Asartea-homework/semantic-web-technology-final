@@ -6,7 +6,7 @@ Create a virtual environment and install dependencies:
 
 ```bash
 uv venv
-source venv/bin/activate
+source .venv/bin/activate
 uv install
 ```
 
