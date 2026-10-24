@@ -1,5 +1,6 @@
 from data import load_stories
 from metadata_recommender import MetadataRecommender
+from semantic_recommender import SemanticRecommender
 
 import random
 
@@ -21,6 +22,8 @@ def print_recommendations(
 
 def main():
     stories = load_stories("stories.jsonl")
+
+    # select the kind of recommender
     recommender = MetadataRecommender(stories)
     ids = random.sample(list(stories.keys()), 5)
     for story_id in ids:
