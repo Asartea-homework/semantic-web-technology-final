@@ -36,10 +36,6 @@ Cosine similarity:
 - 1.0 means the vectors point in exactly the same direction.
 - A value near 0 means the vectors are approximately unrelated in direction.
 - A negative value means the vectors point in opposing directions.
-
-Note: FAISS uses inner product in this implementation. Inner product is
-equivalent to cosine similarity only when the embedding vectors are
-normalized to have a length of 1.
 """
 
 import json  # Provides functions for reading JSON files, such as story_ids.json.
