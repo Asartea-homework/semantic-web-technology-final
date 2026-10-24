@@ -20,3 +20,21 @@ uv run data_cleaner.py
 The semantic recommender needs precomputed embeddings (not stored in git).
 Download `embeddings.zip` from the latest release (Releases tab) and unzip
 it in the repo root, so you have `embeddings/embeddings.npy`.
+
+To test if it works: 
+    - in main.py change this line: 
+
+```python
+    recommender = MetadataRecommender(stories)
+```
+
+    To:
+```python
+    recommender = SemanticRecommender(stories)
+```
+
+    - Then run it from the terminal:
+```bash
+    uv sync
+    uv run main.py
+```
