@@ -28,12 +28,14 @@ To test if it works:
     recommender = MetadataRecommender(stories)
 ```
 
-    To:
+    - To:
+
 ```python
     recommender = SemanticRecommender(stories)
 ```
 
-    - Then run it from the terminal:
+    - Then run it from the terminal: 
+
 ```bash
     uv sync
     uv run main.py
