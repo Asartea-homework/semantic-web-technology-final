@@ -55,7 +55,7 @@ def main():
     files = data_dir.glob("*.json")
     for file in files:
         docs.extend(read_file(file))
-    with open("stories.jsonl", "w") as f:
+    with open("app/stories.jsonl", "w") as f:
         for doc in docs:
             f.write(json.dumps(doc) + "\n")
 
