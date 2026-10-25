@@ -1,21 +1,24 @@
-from data import load_stories
-from metadata_recommender import MetadataRecommender
-from semantic_recommender import SemanticRecommender
-
 import numpy as np
-import random
+
+from app.recommenders.metadata_recommender import MetadataRecommender
+from app.recommenders.semantic_recommender import SemanticRecommender
 
 
 class HybridRecommender:
 
-    def __init__(self, stories):
+    def __init__(self, stories, embeddings_path: str):
         self.metadata_recommender = MetadataRecommender(stories)
-        self.semantic_recommender = SemanticRecommender(stories)
+        self.semantic_recommender = SemanticRecommender(
+            stories, embeddings_path=embeddings_path
+        )
         self.stories = stories
 
     def recommend(self, story_id: str, k: int = 10):
         metadata_recommendations = self.metadata_recommender.recommend(story_id, k * 2)
-        semantic_recommendations = self.semantic_recommender.recommend(story_id, k * 2)
+        semantic_recommendations = self.semantic_recommender.recommend(
+            story_id,
+            k * 2,
+        )
 
         weights = self.get_weights(story_id)
 
@@ -65,32 +68,3 @@ class HybridRecommender:
             metadata_weight = metadata_weight - 0.2
 
         return {"metadata": metadata_weight, "semantic": 1 - metadata_weight}
-
-
-def print_recommendations(
-    story_id: str, stories, recommender: MetadataRecommender, k: int = 10
-):
-    recommendations = recommender.recommend(story_id, k=k)
-    print(
-        f"Recommendations for story ID {story_id} with text {stories[story_id]['main_text']} and tags {stories[story_id]['tag']}:\n"
-    )
-    for rec in recommendations:
-        print(
-            f"ID: {rec['id']}, Similarity: {(rec['similarity'] * 100):.2f}, Title: {rec.get('title', '')}\n"
-        )
-        print(f"Text: {rec.get('main_text', '')}\n")
-
-
-def main():
-    stories = load_stories("stories.jsonl")
-
-    # select the kind of recommender
-    recommender = HybridRecommender(stories)
-    ids = random.sample(list(stories.keys()), 10)
-    for story_id in ids:
-        print_recommendations(story_id, stories, recommender, k=5)
-        print("\n" + "-" * 80 + "\n")
-
-
-if __name__ == "__main__":
-    main()

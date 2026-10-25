@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{ story.title or story.id }} - Story Recommender</title>
+    <link rel="stylesheet" href={{ url_for('static', filename='app.css' ) }}>
+    <link rel="stylesheet" href={{ url_for('static', filename='story.css' )}}>
+
+</head>
+
+<body>
+    <h1>{{ story.title or story.id }}</h1>
+
+    <div class="story-text">
+        <p>{{ story.text }}</p>
+        <p class="tags">Tags: {{ story.tags|join(', ') if story.tags else 'None' }}</p>
+    </div>
+
+    <h2>Similar Stories</h2>
+    <p>Here are 5 stories you might also enjoy:</p>
+
+    {% for rec in recommendations %}
+    <div class="recommendation">
+        <a href="/story/{{ rec.id }}">{{ rec.title or rec.id }}</a>
+        <p class="similarity">Similarity: {{ "%.1f"|format(rec.similarity * 100) }}%</p>
+        <p>{{ rec.text[:200] }}...</p>
+        <p class="tags">Tags: {{ rec.tags|join(', ') if rec.tags else 'None' }}</p>
+    </div>
+    {% endfor %}
+
+    <div class="links">
+        <a href="/" class="btn">Go back home</a>
+        <a href="/random" class="btn">Go to another random story</a>
+    </div>
+</body>
+
+</html>

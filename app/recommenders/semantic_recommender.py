@@ -23,7 +23,9 @@ import numpy as np
 class SemanticRecommender:
     """Recommends stories that are semantically similar to a given story."""
 
-    def __init__(self, stories: dict[str, dict], embeddings_path: str = "embeddings/"):
+    def __init__(
+        self, stories: dict[str, dict], embeddings_path: str = "./embeddings/"
+    ):
         """Loads the precomputed embeddings and builds the search index."""
 
         # Store the complete story dataset on the object.
