@@ -20,6 +20,3 @@ app.config["story_ids"] = list(stories.keys())
 app.config["recommender"] = recommender
 app.register_blueprint(routes)
 app.register_error_handler(404, handle_404)
-
-if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=5000)
