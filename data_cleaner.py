@@ -13,6 +13,8 @@ OPTIONAL_FIELDS = [
     "decennium_group",
     "item_type",
     "title",
+    "latitude",
+    "longitude",
 ]
 
 
